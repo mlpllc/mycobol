@@ -1,0 +1,20 @@
+name: COBOL CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up COBOL compiler
+      run: sudo apt-get install -y open-cobol
+
+    - name: Compile COBOL code
+      run: cobc -x -o myprogram myprogram.cob
+
+    - name: Run tests
+      run: ./myprogram
